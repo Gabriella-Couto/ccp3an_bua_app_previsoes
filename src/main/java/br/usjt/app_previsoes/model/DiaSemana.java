@@ -14,8 +14,13 @@ import javax.persistence.Table;
 public class DiaSemana implements Serializable {
 
 	@Id
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long idDia;
+	
+	@Column(name="nome")
 	private String dia;
+	
+    @OneToOne(mappedBy = "dia")
+	private Previsao previsao;
 
 	public String getDia() {
 		return dia;
@@ -23,5 +28,13 @@ public class DiaSemana implements Serializable {
 
 	public void setDia(String dia) {
 		this.dia = dia;
+	}
+
+	public Long getIdDia() {
+		return idDia;
+	}
+
+	public void setIdDia(Long idDia) {
+		this.idDia = idDia;
 	}
 }

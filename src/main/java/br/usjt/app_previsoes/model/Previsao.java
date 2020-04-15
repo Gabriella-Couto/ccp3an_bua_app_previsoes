@@ -23,9 +23,6 @@ public class Previsao implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	//@Column(name="DIASEMANA")
-	//private String dia;
-	
 	@Column(name="MIN")
 	private Double min;
 	
@@ -50,10 +47,10 @@ public class Previsao implements Serializable {
 	@Column(name="LONGITUDE")
 	private String longitude;
 	
-	@OneToOne(optional=false)
-	@JoinColumn(name="id_dia")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="DIA")
 	private DiaSemana dia;
-	
+
 	public Long getId() {
 		return id;
 	}
