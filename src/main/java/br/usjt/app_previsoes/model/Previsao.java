@@ -5,14 +5,21 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.*;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.usjt.app_previsoes.model.Cidade;
 
 @Entity
 @Table(name="Previsao")
@@ -20,7 +27,6 @@ public class Previsao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="MIN")
@@ -41,16 +47,15 @@ public class Previsao implements Serializable {
 	@Column(name="HORA")
 	private String hora;
 	
-	@Column(name="LATITUDE")
-	private String latitude;
-	
-	@Column(name="LONGITUDE")
-	private String longitude;
-	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="DIA")
+	@JoinColumn(name="dia")
 	private DiaSemana dia;
-
+	
+	@ManyToOne(optional = false
+			)
+	@JoinColumn(name = "ID_CIDADE")
+	private Cidade cidade;
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,21 +104,12 @@ public class Previsao implements Serializable {
 		this.descricao = descricao;
 	}
 
-
-	public String getLatitude() {
-		return latitude;
+	public Cidade getCidade() {
+		return cidade;
 	}
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public Date getData() {

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.usjt.app_previsoes.model.DiaSemana;
 import br.usjt.app_previsoes.model.Previsao;
-
+import br.usjt.app_previsoes.model.Cidade;
 
 @Controller
 public class PrevisoesController {
@@ -22,6 +22,7 @@ public class PrevisoesController {
 	@Autowired
 	private PrevisaoService service;
 	private DiaService diaService;
+	private CidadeService cidadeService;
 	
 	@GetMapping("/Previsoes")
 	public ModelAndView listarPrevisoes() {
@@ -33,6 +34,10 @@ public class PrevisoesController {
 		List<DiaSemana> diasDaSemana = diaService.listarTodos();
 	    mv.addObject("diasDaSemana", diasDaSemana);
 	    mv.addObject(new DiaSemana());
+	    
+	    List<Cidade> cidade = cidadeService.listarTodos();
+	    mv.addObject("cidade", cidade);
+	    mv.addObject(new Cidade());
 		
 		return mv;
 	}

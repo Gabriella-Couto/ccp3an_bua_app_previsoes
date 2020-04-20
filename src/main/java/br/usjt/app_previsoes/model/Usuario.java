@@ -10,7 +10,6 @@ import javax.persistence.Column;
 @Entity
 public class Usuario {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="LOGIN")

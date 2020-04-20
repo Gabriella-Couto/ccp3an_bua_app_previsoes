@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Previsões do Tempo</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
+</head>
+<body>
+   
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Cadastrar cidades</h1>
+		</div>
+		<form class="form-inline" method="post" th:object="${cidade}" th:action="@{/Cidades}" style="margin: 20px">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
+				<input type="text" class="form-control" placeholder="Longitude" th:field="*{longitude}"/>
+				<input type="text" class="form-control" placeholder="Latitude" th:field="*{latitude}" />
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+			</div>
+		</form>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Cidade</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cidade:${cidades}">
+						<td th:text="${cidade.nome}"></td>
+						<td th:text="${cidade.latitude}"></td>
+						<td th:text="${cidade.longitude}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br/><br/>
+			<button type="button" class="btn"><a href="/Previsoes">Previsões</a></button>
+		</div>
+	</div>
+</body>
+</html>
