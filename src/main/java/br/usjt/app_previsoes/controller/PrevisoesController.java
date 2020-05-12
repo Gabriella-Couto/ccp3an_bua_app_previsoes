@@ -1,51 +1,44 @@
 package br.usjt.app_previsoes.controller;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
-import br.usjt.app_previsoes.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.usjt.app_previsoes.model.DiaSemana;
 import br.usjt.app_previsoes.model.Previsao;
-import br.usjt.app_previsoes.model.Cidade;
+import br.usjt.app_previsoes.service.DiasSemanaService;
+import br.usjt.app_previsoes.service.PrevisoesService;
+import br.usjt.app_previsoes.service.CidadesService;
 
 @Controller
 public class PrevisoesController {
 
 	@Autowired
-	private PrevisaoService service;
-	private DiaService diaService;
-	private CidadeService cidadeService;
-	
+	private PrevisoesService previsoesService;
+
+	@Autowired
+	private DiasSemanaService diasService;
+
+	@Autowired
+	private CidadesService cidadesService;
+
 	@GetMapping("/Previsoes")
 	public ModelAndView listarPrevisoes() {
 		ModelAndView mv = new ModelAndView("Previsoes");
-		List<Previsao> previsoes = service.listarTodos();
-		mv.addObject("previsoes", previsoes);
+
 		mv.addObject(new Previsao());
-		
-		List<DiaSemana> diasDaSemana = diaService.listarTodos();
-	    mv.addObject("diasDaSemana", diasDaSemana);
-	    mv.addObject(new DiaSemana());
-	    
-	    List<Cidade> cidade = cidadeService.listarTodos();
-	    mv.addObject("cidade", cidade);
-	    mv.addObject(new Cidade());
-		
+		mv.addObject("previsoes", previsoesService.listarTodos());
+		mv.addObject("diasSemana", diasService.listarTodos());
+		mv.addObject("cidades", cidadesService.listarTodos());
+
 		return mv;
 	}
-	
+
 	@PostMapping("/Previsoes")
 	public String salvarPrevisao(Previsao previsao) {
-		service.salvar(previsao);
-		
+		previsoesService.salvar(previsao);
+
 		return "redirect:/Previsoes";
 	}
 }

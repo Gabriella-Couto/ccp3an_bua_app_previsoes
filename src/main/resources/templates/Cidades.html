@@ -8,16 +8,15 @@
 <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
 </head>
 <body>
-   
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
-			<h1 class="panel-title">Cadastrar cidades</h1>
+			<h1 class="panel-title">Cidades</h1>
 		</div>
 		<form class="form-inline" method="post" th:object="${cidade}" th:action="@{/Cidades}" style="margin: 20px">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}"/>
-				<input type="text" class="form-control" placeholder="Longitude" th:field="*{longitude}"/>
-				<input type="text" class="form-control" placeholder="Latitude" th:field="*{latitude}" />
+				<input type="text" class="form-control" placeholder="Longitude" th:field="*{longitude}" pattern="[0-9]*\.?[0-9]*" title="Insira apenas números e divididos por ponto (.)"/>
+				<input type="text" class="form-control" placeholder="Latitude" th:field="*{latitude}" pattern="[0-9]*\.?[0-9]*" title="Insira apenas números e divididos por ponto (.)"/>
 				<button type="submit" class="btn btn-primary">Adicionar</button>
 			</div>
 		</form>
@@ -38,8 +37,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<br/><br/>
-			<button type="button" class="btn"><a href="/Previsoes">Previsões</a></button>
+			<button type="button" class="btn btn-primary"><a href="/Previsoes" style=" color: #fff; ">Home</a></button>
 		</div>
 	</div>
 </body>

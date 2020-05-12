@@ -6,20 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.usjt.app_previsoes.model.Cidade;
-import br.usjt.app_previsoes.repository.CidadeRepository;
+import br.usjt.app_previsoes.repository.CidadesRepository;
 
 @Service
-public class CidadeService {
+public class CidadesService {
 	@Autowired
-	private CidadeRepository cidadeRepo;
-	
+	private CidadesRepository cidadesRepo;
+
 	public void salvar(Cidade cidade) {
-		cidadeRepo.save(cidade);
+		cidadesRepo.save(cidade);
 	}
-	
+
 	public List<Cidade> listarTodos(){
-		List<Cidade> cidades = cidadeRepo.findAll();
-		
-		return cidades;
+		return cidadesRepo.findAll();
 	}
 }

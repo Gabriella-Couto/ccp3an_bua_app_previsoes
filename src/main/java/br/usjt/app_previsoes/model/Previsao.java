@@ -1,32 +1,27 @@
 package br.usjt.app_previsoes.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import java.sql.Date;
-import java.time.*;
-
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import br.usjt.app_previsoes.model.Cidade;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Previsao")
+@Table(name = "Previsoes")
 public class Previsao implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="MIN")
@@ -47,15 +42,14 @@ public class Previsao implements Serializable {
 	@Column(name="HORA")
 	private String hora;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="dia")
-	private DiaSemana dia;
-	
-	@ManyToOne(optional = false
-			)
+	@OneToOne(optional = false)
+	@JoinColumn(name = "ID_DIASEMANA")
+	private DiaSemana diaSemana;
+
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "ID_CIDADE")
 	private Cidade cidade;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -63,13 +57,30 @@ public class Previsao implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public DiaSemana getDia() {
-		return dia;
+
+	public DiaSemana getDiaSemana() {
+		return diaSemana;
 	}
 
-	public void setDia(DiaSemana dia) {
-		this.dia = dia;
+	public void setDiaSemana(DiaSemana diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	public Double getMin() {
@@ -96,22 +107,6 @@ public class Previsao implements Serializable {
 		this.humidade = humidade;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Cidade getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
-
 	public Date getData() {
 		return data;
 	}
@@ -127,5 +122,6 @@ public class Previsao implements Serializable {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
+	
 	
 }

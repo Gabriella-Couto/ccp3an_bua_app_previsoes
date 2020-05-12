@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-<title>Previsões do tempo - Floripa </title>
+<title>Previsões do tempo</title>
 <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet" />
 
@@ -21,7 +21,6 @@
 				<select class="form-control" th:field="*{cidade}">
 					<option th:each="cid : ${cidades}" th:value="${cid.id}" th:text="${cid.nome}"></option>
 				</select>
-				<input type="text"  class="form-control" placeholder="semana" th:field="*{dia}"/>
 				<input type="text" class="form-control" placeholder="Temp. Min." th:field="*{min}" pattern="[0-9]*\.?[0-9]*" title="Insira apenas números e divididos por ponto (.)"/>
 				<input type="text" class="form-control" placeholder="Temp. Max." th:field="*{max}" pattern="[0-9]*\.?[0-9]*" title="Insira apenas números e divididos por ponto (.)"/>
 				<input type="text" class="form-control" placeholder="Humidade" th:field="*{humidade}"/>

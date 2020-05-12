@@ -1,42 +1,40 @@
 package br.usjt.app_previsoes.model;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Cidade")
-
-public class Cidade implements Serializable  {
-	
-	/**
-	 * 
-	 */
+@Table(name = "Cidades")
+public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="NOME")
+
+	@Column(name = "NOME")
 	private String nome;
-	
-	@Column(name="LATITUDE")
-	private String latitude;
-	
-	@Column(name="LONGITUDE")
-	private String longitude;
-	
-	@OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL)
-	private List<Previsao> previsao;
+
+
+	@Column(name = "LONGITUDE")
+	private Double longitude;
+
+	@Column(name = "LATITUDE")
+	private Double latitude;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -46,39 +44,20 @@ public class Cidade implements Serializable  {
 		this.nome = nome;
 	}
 
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-	
-	public List<Previsao> getPrevisao() {
-		return previsao;
+	public Double getLatitude() {
+		return latitude;
 	}
 
-	public void setPrevisao(List<Previsao> previsao) {
-		this.previsao = previsao;
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
-	
 }
